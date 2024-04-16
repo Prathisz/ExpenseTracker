@@ -87,3 +87,19 @@ app.get('/get-expenses', async function(request, response) {
         })
     }
 })
+
+app.delete('/delete-expense/:id', async function(request, response) {
+    try {
+        await Expense.findByIdAndDelete(request.params.id)
+        response.status(200).json({
+            "status" : "success",
+            "message" : "entry deleted"
+        })
+    } catch(error) {
+        response.status(500).json({
+            "status" : "failure",
+            "message" : "couldn\'t delete entry",
+            "error" : error
+        })
+    }
+})

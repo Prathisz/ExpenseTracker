@@ -11,7 +11,7 @@ const expenseDetailsSchema = new mongoose.Schema({
     date: {
         type: String
     }
-})
+}, {versionKey: false})
 
 // creating a model
 const Expense = mongoose.model('ExpenseDetails', expenseDetailsSchema)
@@ -26,7 +26,7 @@ const userDetailsSchema = new mongoose.Schema({
     user_name: {
         type: String
     }
-})
+}, {versionKey: false})
 
 const User = mongoose.model('UserDetails', userDetailsSchema)
 
