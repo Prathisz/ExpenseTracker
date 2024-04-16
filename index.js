@@ -11,8 +11,23 @@
  * monthly analysis
  */
 
+/**
+ * Database - Expense Tracker
+ * Collections
+ *      i) ExpenseDetails
+ *          - amount (number)
+ *          - category (string)
+ *          - date (string)
+ *      ii) UserDetails
+ *          - username
+ *          - emailID
+ *          - password
+ */
+
 const express = require('express')
 const mongoose = require('mongoose')
+
+const { Expense } = require('./schema.js')
 
 const app = express()
 
