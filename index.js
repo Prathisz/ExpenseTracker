@@ -1,4 +1,12 @@
 /**
+ * Functionalities of the application
+ * End points
+ * Express application
+ * DB connection
+ * Schema definition and creating a model
+ */
+
+/**
  * CRUD operations
  * adding a new expense -> /add-expense (post)
  * view existing ones -> /get-expenses (get)
@@ -24,16 +32,18 @@
  *          - password
  */
 
+const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 
-const { Expense } = require('./schema.js')
+const { Expense, User } = require('./schema.js')
 
 const app = express()
+app.use(bodyParser.json())
 
 async function connectToDb() {
     try {
-        await mongoose.connect('mongodb+srv://shri:0000@cluster0.4xlmvfd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+        await mongoose.connect('mongodb+srv://shri:0000@cluster0.4xlmvfd.mongodb.net/ExpenseTracker?retryWrites=true&w=majority&appName=Cluster0')
         console.log("DB connection established :)")
         app.listen(8000, function() {
             console.log('Listening on port 8000...')
@@ -44,3 +54,23 @@ async function connectToDb() {
     }
 }
 connectToDb()
+
+app.post('/add-expense', async function(request, response) {
+    try {
+        await Expense.create({
+            "amount": request.body.amount,
+            "category": request.body.category,
+            "date": request.body.date
+        })
+        response.status(201).json({
+            "status" : "success",
+            "message" : "entry successfully added"
+        })
+    } catch(error) {
+        response.status(500).json({
+            "status" : "failure",
+            "message" : "entry not created",
+            "error" : error
+        })
+    }
+})

@@ -1,4 +1,3 @@
-const { execSync } = require('child_process')
 const mongoose = require('mongoose')
 
 // Defining schema
@@ -17,4 +16,18 @@ const expenseDetailsSchema = new mongoose.Schema({
 // creating a model
 const Expense = mongoose.model('ExpenseDetails', expenseDetailsSchema)
 
-module.exports = { Expense }
+const userDetailsSchema = new mongoose.Schema({
+    emailID: {
+        type: String
+    },
+    password: {
+        type: String
+    },
+    user_name: {
+        type: String
+    }
+})
+
+const User = mongoose.model('UserDetails', userDetailsSchema)
+
+module.exports = { Expense, User }
