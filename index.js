@@ -103,3 +103,23 @@ app.delete('/delete-expense/:id', async function(request, response) {
         })
     }
 })
+
+app.patch('/update-expense/:id', async function(request, response) {
+    try {
+        await Expense.findByIdAndUpdate(request.params.id, {
+            "amount": request.body.amount,
+            "category": request.body.category,
+            "date": request.body.date
+        })
+        response.status(200).json({
+            "status" : "success",
+            "message" : "entry updated"
+        })
+    } catch(error) {
+        response.status(500).json({
+            "status" : "failure",
+            "message" : "couldn\'t update entry",
+            "error" : error
+        })
+    }
+})
