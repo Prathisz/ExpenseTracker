@@ -1,4 +1,15 @@
 /**
+ * git clone <link>
+ * 
+ * git add .
+ * git commit -m "message"
+ * git push
+ * 
+ * git config --global user.name '<github username>'
+ * git config --global user.email <github emailID>
+ */
+
+/**
  * Functionalities of the application
  * End points
  * Express application
